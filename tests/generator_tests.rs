@@ -87,6 +87,16 @@ fn generates_find_module_for_every_crate_with_all() {
 #[test]
 fn generate_header_reports_missing_cbindgen_clearly() {
     let manifest_path = fixture_manifest();
+
+    // Build first: metadata::load() locates the library before it touches
+    // headers, so an unbuilt fixture would fail for the wrong reason here.
+    let build_status = Command::new(env!("CARGO"))
+        .args(["build", "--manifest-path"])
+        .arg(&manifest_path)
+        .status()
+        .expect("failed to run `cargo build` on fixture crate");
+    assert!(build_status.success(), "fixture crate failed to build");
+
     let out_dir = std::env::temp_dir().join(format!("cargo-cmake-bridge-test-hdr-{}", std::process::id()));
     let _ = std::fs::remove_dir_all(&out_dir);
 
@@ -103,7 +113,7 @@ fn generate_header_reports_missing_cbindgen_clearly() {
     // is, this test just confirms the command didn't crash instead.
     if !output.status.success() {
         let stderr = String::from_utf8_lossy(&output.stderr);
-        assert!(stderr.contains("cbindgen"));
+        assert!(stderr.contains("cbindgen"), "unexpected error: {stderr}");
     }
 
     let _ = std::fs::remove_dir_all(&out_dir);

@@ -7,6 +7,10 @@ license = "MIT"
 repository = ""
 readme = "README.md"
 
+[lib]
+name = "cargo_cmake_bridge"
+path = "src/lib.rs"
+
 [[bin]]
 name = "cargo-cmake-bridge"
 path = "src/main.rs"
