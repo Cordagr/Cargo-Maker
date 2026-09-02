@@ -1,0 +1,10 @@
+[package]
+name = "sample-crate"
+version = "0.2.0"
+edition = "2021"
+
+[lib]
+crate-type = ["staticlib"]
+
+# Isolate this fixture from the parent package's implicit workspace.
+[workspace]

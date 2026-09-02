@@ -1,0 +1,7 @@
+/target
+*.cmake.out
+/fixtures/*/cmake/
+/fixtures/*/Cargo.lock
+/fixtures/*/target/
+/examples/*/build/
+.DS_Store
