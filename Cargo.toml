@@ -4,8 +4,9 @@ version = "0.1.0"
 edition = "2021"
 description = "Cargo subcommand that generates CMake Find<Crate>.cmake files for linking Rust crates into CMake/C++ projects."
 license = "MIT"
-repository = ""
+repository = "https://github.com/Cordagr/Cargo-Maker"
 readme = "README.md"
+exclude = ["fixtures/*", "examples/*", ".github/*"]
 
 [lib]
 name = "cargo_cmake_bridge"
